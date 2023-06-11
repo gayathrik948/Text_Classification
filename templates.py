@@ -2,7 +2,7 @@ from pathlib import Path
 import os
 import logging
 
-project = 'text-classification'
+project = 'text_classification'
 
 list_of_files = [
     ".github/workflows/.gitkeep",
