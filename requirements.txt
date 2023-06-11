@@ -1,0 +1,7 @@
+from_root
+pandas
+numpy
+scikit-learn
+transformers
+
+-e .
