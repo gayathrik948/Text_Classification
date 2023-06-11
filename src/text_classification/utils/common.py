@@ -1,7 +1,8 @@
 from ensure import ensure_annotations
-from src.text_classification.logging import logging
-from src.text_classification.exceptions import CustomException
+from text_classification.logging import logging
+from text_classification.exceptions import CustomException
 from box import ConfigBox
+from box.exceptions import BoxValueError
 import os, sys
 import yaml
 from pathlib import Path
@@ -15,6 +16,8 @@ def read_yaml(path_to_yaml:Path)->ConfigBox:
             content = yaml.safe_load(yaml_file)
             logging.info(f"{path_to_yaml} is loaded Successfully")
             return ConfigBox(content)
+    except BoxValueError:
+        raise ValueError("yaml file is empty")
     except Exception as e:
         raise CustomException(e, sys)
 
