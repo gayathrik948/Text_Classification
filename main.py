@@ -38,15 +38,15 @@ except Exception as e:
 
 
 
-STAGE_NAME = "MODEL_PREDICTION"
-
-try:
-    logging.info(f"{STAGE_NAME} is started")
-    model_prediction = ModelPredictionPipeline()
-    model_prediction.modelpredictionpipeline()
-
-    logging.info(f"{STAGE_NAME} is completed")
-
-except Exception as e:
-    logging.info(e)
-    raise CustomException(e, sys)
+# STAGE_NAME = "MODEL_PREDICTION"
+#
+# try:
+#     logging.info(f"{STAGE_NAME} is started")
+#     model_prediction = ModelPredictionPipeline()
+#     model_prediction.modelpredictionpipeline()
+#
+#     logging.info(f"{STAGE_NAME} is completed")
+#
+# except Exception as e:
+#     logging.info(e)
+#     raise CustomException(e, sys)
