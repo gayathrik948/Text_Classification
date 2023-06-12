@@ -1,7 +1,7 @@
-import logging
+from text_classification.logging import logging
 import zipfile
 from text_classification.config.configuration import DataIngestionConfig
-from text_classification.utils.common import get_size
+from text_classification.utils.common import get_size, _compute_label_mapping
 from text_classification.exceptions import CustomException
 from sklearn.model_selection import train_test_split
 import urllib.request as request
@@ -30,20 +30,44 @@ class DataIngestion:
             zip_file.extractall(unzip_data)
             logging.info(f'Successfully unzipped the data, and save into directory')
 
+    # def label_encoding(self):
+    #
+    #     raw_file = self.config.unzip_dir_file
+    #     column_names = self.config.column_names
+    #     label_encoded_dir = self.config.label_encoded_dir
+    #     label_encoded_name = self.config.label_encoded_name
+    #
+    #     if not os.path.exists(raw_file):
+    #         self.unzip_data()
+    #
+    #     raw_data = pd.read_csv(raw_file, encoding='latin-1')
+    #     label2id = _compute_label_mapping(raw_data[column_names[1]])[0]
+    #     raw_data[column_names[1]] = [label2id[label] for label in raw_data[column_names[1]]]
+    #
+    #     os.makedirs(label_encoded_dir, exist_ok=True)
+    #     label_encoded_file_path = os.path.join(label_encoded_dir, label_encoded_name)
+    #     raw_data.to_csv(label_encoded_file_path, index=False)
+
+
+
+
     def train_test_split(self):
         try:
+            raw_file = self.config.unzip_dir_file
             train_file_dir = self.config.train_file_dir
             test_file_dir = self.config.test_file_dir
             train_file_name = self.config.train_file_name
             test_file_name = self.config.test_file_name
-            raw_file = self.config.unzip_dir_file
+
 
             if not os.path.exists(raw_file):
                 self.unzip_data()
 
+
             raw_data = pd.read_csv(raw_file, encoding='latin-1')
 
             train_data, test_data = train_test_split(raw_data, test_size=self.config.test_size)
+
             os.makedirs(train_file_dir, exist_ok=True)
             train_file_path = os.path.join(train_file_dir, train_file_name)
             train_data.to_csv(train_file_path, index=False)
@@ -56,6 +80,7 @@ class DataIngestion:
         except Exception as e:
             logging.info(f"no csv file exist")
             raise CustomException(e,sys)
+
 
 
 
