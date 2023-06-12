@@ -5,7 +5,7 @@ import logging
 project = 'text_classification'
 
 list_of_files = [
-    ".github/workflows/.gitkeep",
+    ".github/workflows/main.yaml",
     f"src/{project}/__init__.py",
     f"src/{project}/utils/__init__.py",
     f"src/{project}/logging/__init__.py",
